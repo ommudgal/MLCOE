@@ -1,14 +1,19 @@
 import streamlit as st
+import joblib
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from models import Linear_Regression, Decision_Tree
 from functions import *
 
-st.title("Crop Yield Prediction")
+st.title("Prediction App")
+st.subheader("Provide the input values below:")
 
-data_load_state = st.text("Loading data...")
+model_list = {
+    "Linear Regression": Linear_Regression,
+    "Decision Tree": Decision_Tree,
+}
+models = st.selectbox("Select the model", model_list.keys())
 
-data = load_data(r"D:\Projects\MLCOE\Notebooks\data\dataset2.csv", 10)
-
-st.subheader("Dataset")
-st.write(data)
-data_load_state.text("Loading data...done!")
+model_list[models]()
