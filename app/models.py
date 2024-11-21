@@ -200,4 +200,4 @@ def Decision_Tree():
         dataset2[numerical_cols] = scaler.fit_transform(dataset2[numerical_cols])
         model0 = joblib.load(r"D:\Projects\MLCOE\Notebooks\models\Decision_Tree.joblib")
         y_pred = model0.predict(dataset2.iloc[-1].values.reshape(1, -1))
-        st.write(f"Predicted Yield: {y_pred[0]}")
+        st.write(f"Loan Status: {y_pred[0]}")
