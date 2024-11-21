@@ -137,6 +137,10 @@ def Linear_Regression():
         categorical_cols = dataset.select_dtypes(include=["object", "category"]).columns
         for col in categorical_cols:
             dataset2[col] = label_encoder.fit_transform(dataset[col])
+        from sklearn.preprocessing import StandardScaler
+
+        scaler = StandardScaler()
+        dataset2[numerical_cols] = scaler.fit_transform(dataset2[numerical_cols])
 
         model0 = joblib.load(r"D:\Projects\MLCOE\Notebooks\models\linear_model.joblib")
         y_pred = model0.predict(dataset2.iloc[-1].values.reshape(1, -1))
@@ -190,7 +194,10 @@ def Decision_Tree():
         categorical_cols = dataset.select_dtypes(include=["object", "category"]).columns
         for col in categorical_cols:
             dataset2[col] = label_encoder.fit_transform(dataset[col])
+        from sklearn.preprocessing import StandardScaler
 
+        scaler = StandardScaler()
+        dataset2[numerical_cols] = scaler.fit_transform(dataset2[numerical_cols])
         model0 = joblib.load(r"D:\Projects\MLCOE\Notebooks\models\Decision_Tree.joblib")
         y_pred = model0.predict(dataset2.iloc[-1].values.reshape(1, -1))
         st.write(f"Predicted Yield: {y_pred[0]}")
